@@ -4,7 +4,7 @@
 
 L2 Objective for GAN:
 
-<img src="img/loss.png" >
+<img src="img/loss.png" width=500>
 
 ### Loss Plot
 
