@@ -4,10 +4,7 @@
 
 L2 Objective for GAN:
 
-`loss_D = 0.5 * (tf.reduce_mean((outReal-1)**2)+tf.reduce_mean(outComp**2))`
-
-`loss_GP = 0.5 * (tf.reduce_mean(outComp-1)**2)`
-
+<img src="img/loss.png" width=300>
 
 ### Loss Plot
 
