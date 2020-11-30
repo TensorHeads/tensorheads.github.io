@@ -64,8 +64,7 @@ Where, p<sub>i</sub> are the parameters that the generator produces and x(p<sub>
 
 #### Loss Plot
 
-<img src="img/curve1.png" width=400>
-<img src="img/curve2.png" width=400>
+<img src="img/L2_Loss_curve.png">
 
 The orange curve is the Phase 1 training's loss of the Discriminator and the blue curve is the Phase 2 training's loss of both the Discriminator and the Generator. We stopped the Phase 2 training after 12k iterations as the Discriminator's loss was really low but the results were bad as shown below.
 
