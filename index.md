@@ -1,4 +1,47 @@
 ## Appendix
+## Architecture Details of the final model:
+```
+Generator(
+	(0):Conv2d(7, 32,kernel_size=(4, 4), stride=(2, 2), padding="SAME", bias=True),
+	(1):ReLU(),
+	(2):Conv2d(32, 64,kernel_size=(4, 4), stride=(2, 2), padding="SAME", bias=True),
+	(3):ReLU(),
+	(4):Conv2d(64, 128,kernel_size=(4, 4), stride=(2, 2), padding="SAME", bias=True),
+	(5):ReLU(),
+	(6):Conv2d(128, 256,kernel_size=(4, 4), stride=(2, 2), padding="SAME", bias=True),
+	(7):ReLU(),
+	(8):Conv2d(256, 512,kernel_size=(4, 4), stride=(2, 2), padding="SAME", dilations=1, bias=True),
+	(9):ReLU(),
+	(10):Linear(512, 256),
+	(11):ReLU(),
+	(12):Linear(256, 6) 
+)
+```
+```
+Discriminator(
+	(0):Conv2d(7, 32, kernel_size=(4, 4), stride=(2, 2), padding="SAME", bias=True),
+	(1):LayerNorm(32, epsilon=1e-05)
+	(2):LeakyReLU()
+	(3):Conv2d(32, 64, kernel_size=(4, 4), stride=(2, 2), padding="SAME", bias=True),
+	(4):LayerNorm(64, epsilon=1e-05)
+	(5):LeakyReLU()
+	(6):Conv2d(64, 128, kernel_size=(4, 4), stride=(2, 2), padding="SAME", bias=True),
+	(7):LayerNorm(128, epsilon=1e-05)
+	(8):LeakyReLU()
+	(9):Conv2d(128, 256, kernel_size=(4, 4), stride=(2, 2), padding="SAME", bias=True),
+	(10):LayerNorm(256, epsilon=1e-05)
+	(11):LeakyReLU()
+	(12):Conv2d(256, 512, kernel_size=(4, 4), stride=(2, 2), padding="SAME", bias=True),
+	(13):LayerNorm(512, epsilon=1e-05)
+	(14):LeakyReLU(),
+	(15):Conv2d(512, 1, kernel_size=(3, 3), stride=(1, 1), padding="SAME", dilations=1, bias=True)
+)
+```
+**Some important hyper-parameters:** 
+```Image-transforamation: Affine
+Batch-Size: 20
+Initial Foregound Image perturbation:0.2
+```
 
 ## Other Experiments:
 
@@ -24,5 +67,13 @@ The orange curve is the Phase 1 training's loss of the Discriminator and the blu
 <img src="img/i1.png" width=800>
 
 The Generator produces parameters such that a major part of the bag is out of frame. It learned a trivial solution, when using the L2 loss.
+### Image Transformation: Homography
+We tried using Homography as our image transformation (the one used in the original paper) with our new network as stated above and keeping everything else as constant. Below are the results. 
 
+<img src="img/" width=800>
 
+As you can see, a lot of the bags blew up. We think this might be because a lot of the crawled images have non-white background and the 2 extra degrees of freedom this transformation has over affine. So, in an effort to restrict the transformations applied on the bags, we tried changing the transformation parameters to affine and that seems to work well.
+
+### Hyper-parameter Tuning Experiments
+
+We also tried changing other hyper-parameters such as number of warps, number of iterations, batch size, scale of initial perturbation etc. When increasing the number of iterations to a 100k in each warp we found results to be overfitting, and when decreasing it to a 25k it started underfitting. We observed similar results when increasing or decreasing the number of warps from 5. Batch size changes and initial perturbation changes did not make significant differences in the results.
