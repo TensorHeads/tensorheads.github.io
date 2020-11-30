@@ -75,7 +75,7 @@ The Generator produces parameters such that a major part of the bag is out of fr
 ### Image Transformation: Homography
 We tried using Homography as our image transformation (the one used in the original paper) with our new network as stated above and keeping everything else as constant. Below are the results. 
 
-<img src="img/" width=800>
+<img src="img/homography_bad_result.png" width=400>
 
 As you can see, a lot of the bags blew up. We think this might be because a lot of the crawled images have non-white background and the 2 extra degrees of freedom this transformation has over affine. So, in an effort to restrict the transformations applied on the bags, we tried changing the transformation parameters to affine and that seems to work well.
 
