@@ -21,27 +21,29 @@ Generator(
 Discriminator(
 	(0):Conv2d(7, 32, kernel_size=(4, 4), stride=(2, 2), padding="SAME", bias=True),
 	(1):LayerNorm(32, epsilon=1e-05)
-	(2):LeakyReLU()
+	(2):LeakyReLU(0.2)
 	(3):Conv2d(32, 64, kernel_size=(4, 4), stride=(2, 2), padding="SAME", bias=True),
 	(4):LayerNorm(64, epsilon=1e-05)
-	(5):LeakyReLU()
+	(5):LeakyReLU(0.2)
 	(6):Conv2d(64, 128, kernel_size=(4, 4), stride=(2, 2), padding="SAME", bias=True),
 	(7):LayerNorm(128, epsilon=1e-05)
-	(8):LeakyReLU()
+	(8):LeakyReLU(0.2)
 	(9):Conv2d(128, 256, kernel_size=(4, 4), stride=(2, 2), padding="SAME", bias=True),
 	(10):LayerNorm(256, epsilon=1e-05)
-	(11):LeakyReLU()
+	(11):LeakyReLU(0.2)
 	(12):Conv2d(256, 512, kernel_size=(4, 4), stride=(2, 2), padding="SAME", bias=True),
 	(13):LayerNorm(512, epsilon=1e-05)
-	(14):LeakyReLU(),
+	(14):LeakyReLU(0.2),
 	(15):Conv2d(512, 1, kernel_size=(3, 3), stride=(1, 1), padding="SAME", dilations=1, bias=True)
 )
 ```
 **Some important hyper-parameters:** 
 ```
-Image-transforamation: Affine 
-Batch-Size: 20 
-Initial Foregound Image perturbation:0.2
+Image-transforamation: Affine, 
+Batch-Size: 20, 
+Initial Foregound Image perturbation:0.2,
+Number of warps: 5,
+Number of iterations in each warp: 50,000
 ```
 
 ## Other Experiments:
