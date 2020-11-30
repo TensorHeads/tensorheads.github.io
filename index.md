@@ -53,7 +53,7 @@ Number of iterations in each warp: 50,000
 We tried setting up the DC-GAN with the DeepFashion - Fashion synthesis dataset. The default architecture supports generation of images of size 64x64. After training the model, the generated images of size 64x64 were pretty good. But we required images to be of higher resolution than that. So, we tried making required changes to the default architecture to support generation of higher resolution images but the model seemed to be too slow at learning. After training it for around 1500-2000 iterations, the Generator loss got stuck at 100 and the discriminator loss around 0. And then observing the output, the generated images were very poor, not even vaguely close to human body form. On continuing the training, the model seemed to be stuck at one point and hence we decided to move to StyleGan2 which proved to be working well for high-resolution image generation.
 
 
-### L2 Objective for GAN:
+### L2 Objective for ST-GAN:
 We tried changing the GAN Objective to L2 Objective to check the quality of the image being generated. Keeping everything else as constant, we changed the GAN Objective from 
 WGAN to L2. Below are the loss functions for the Discriminator and the Generators.
 
@@ -72,13 +72,13 @@ The orange curve is the Phase 1 training's loss of the Discriminator and the blu
 <img src="img/i1.png" width=800>
 
 The Generator produces parameters such that a major part of the bag is out of frame. It learned a trivial solution, when using the L2 loss.
-### Image Transformation: Homography
+### Image Transformation: Homography for ST-GAN
 We tried using Homography as our image transformation (the one used in the original paper) with our new network as stated above and keeping everything else as constant. Below are the results. 
 
 <img src="img/homography_bad_result.png" width=400>
 
 As you can see, a lot of the bags blew up. We think this might be because a lot of the crawled images have non-white background and the 2 extra degrees of freedom this transformation has over affine. So, in an effort to restrict the transformations applied on the bags, we tried changing the transformation parameters to affine and that seems to work well.
 
-### Hyper-parameter Tuning Experiments
+### Experiments with Hyper-parameter Tuning for ST-GAN
 
 We also tried changing other hyper-parameters such as number of warps, number of iterations, batch size, scale of initial perturbation etc. When increasing the number of iterations to a 100k in each warp we found results to be overfitting, and when decreasing it to a 25k it started underfitting. We observed similar results when increasing or decreasing the number of warps from 5. Batch size changes and initial perturbation changes did not make significant differences in the results.
