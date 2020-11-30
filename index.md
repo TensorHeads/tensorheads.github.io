@@ -38,8 +38,9 @@ Discriminator(
 )
 ```
 **Some important hyper-parameters:** 
-```Image-transforamation: Affine
-Batch-Size: 20
+```
+Image-transforamation: Affine 
+Batch-Size: 20 
 Initial Foregound Image perturbation:0.2
 ```
 
