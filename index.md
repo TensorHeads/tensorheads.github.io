@@ -57,7 +57,10 @@ We tried setting up the DC-GAN with the DeepFashion - Fashion synthesis dataset.
 We tried changing the GAN Objective to L2 Objective to check the quality of the image being generated. Keeping everything else as constant, we changed the GAN Objective from 
 WGAN to L2. Below are the loss functions for the Discriminator and the Generators.
 
-<img src="img/loss.png" width=500>
+<img src="https://latex.codecogs.com/gif.latex?L_D%20=%20\frac{1}{2}%20\mathop{\mathbb{E}}_{x,p_i}[D(x(p_i))^2]%20+%20\frac{1}{2}%20\mathop{\mathbb{E}}_y[(D(y)-1)^2]" />
+<img src="https://latex.codecogs.com/gif.latex?L_G%20=%20\frac{1}{2}%20\mathop{\mathbb{E}}_{x,p_i}[D(x(p_i)-1)^2]" />
+
+Where, p<sub>i</sub> are the parameters that the generator produces and x(p<sub>i</sub>) is the composite image of the foreground and the background after the foreground (bag) image has been transformed using p<sub>i</sub>
 
 #### Loss Plot
 
