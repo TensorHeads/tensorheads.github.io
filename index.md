@@ -1,4 +1,4 @@
-## Addendum
+# Addendum
 ## Architecture Details of the final model:
 ```
 Generator(
